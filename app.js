@@ -74,7 +74,7 @@ limpiar.addEventListener('click', ()=> {
     document.getElementById('nombre').value = " ";
     document.getElementById('cantidad').value = " ";
     document.getElementById('costo').value = " ";
-    document.getElementById('detalles').innerHTML = ` `;
-    document.getElementById('detalles1').innerHTML = ` `;
+    document.getElementById('detalles').innerHTML = " ";
+    document.getElementById('detalles1').innerHTML = " ";
 });
 //Ramos Macías Carmen Shaireni 3°G

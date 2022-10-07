@@ -12,33 +12,73 @@ class Inventario{
         if(max !== 0){ 
             do{
                 buscado = Math.floor((min + max)/2);
-                console.log(buscado);
-
-                if(producto.getCodigo() > this._productos[buscado].getCodigo()){
-                    if(producto.getCodigo() < this._productos[buscado + 1].getCodigo()){
+                console.log("b" + buscado);
+                if(buscado === 0){
+                    if(producto.getCodigo() < this._productos[buscado].getCodigo()){
                         this._productos.push(this._productos[this._productos.length-1]);
-                        
+    
                         for(let i = this._productos.length-2; i > buscado; i--){
                             this._productos[i] = this._productos[i - 1];
                         }
                         
-                        this._productos[buscado + 1] = producto;
+                        this._productos[0] = producto;
+    
+                        fin = true;
+                    }else{
+                        this._productos.push(this._productos[this._productos.length-1]);
+    
+                        for(let i = this._productos.length-2; i > buscado +1; i--){
+                            this._productos[i] = this._productos[i - 1];
+                        }
+                        
+                        this._productos[1] = producto;
+    
                         fin = true;
                     }
                 }else{
-                    if(this._productos[buscado].getCodigo() > producto.getCodigo()){
-                        max = buscado;
+                    if(producto.getCodigo() < this._productos[buscado].getCodigo()){
+                        if(producto.getCodigo() > this._productos[buscado - 1].getCodigo()){
+                            this._productos.push(this._productos[this._productos.length-1]);
+                            
+                            for(let i = this._productos.length-2; i > buscado; i--){
+                                this._productos[i] = this._productos[i - 1];
+                            }
+                            
+                            this._productos[buscado] = producto;
+                            fin = true;
+                        }else{
+                            if(buscado === 0){
+                                for(let i = this._productos.length-2; i > buscado; i--){
+                                    this._productos[i] = this._productos[i - 1];
+                                }
+                                
+                                this._productos[buscado] = producto;
+                                console.log("agregar  ");
+                                fin = true;
+                            }
+                        }
                     }else{
-                        min = buscado;
+    
+                        if(buscado === this._productos.length -1){
+                            this._productos.push(producto);
+                            console.log("agregar ultimo");
+                            fin = true;
+                        }else{
+                            if(this._productos[buscado].getCodigo() > producto.getCodigo()){
+                                max = buscado;
+                            }else{
+                                min = buscado;
+                            }
+                        }
                     }
                 }
-                console.log(min);
-                console.log(max);
-            }while(fin === false && min < max);
+                console.log("min" + min);
+                console.log("max" + max);
+            }while(fin === false && min < max );
 
         }else{
             this._productos.push(producto);
-            console.log("agregar");
+            console.log("agregar1");
         }
     }  
     
@@ -60,7 +100,7 @@ class Inventario{
                         min = buscado+1;
                     }
                 }
-            }while(fin === false && min < max);    
+            }while(fin === false && min < max );    
         }
         return null;
     }
