@@ -50,7 +50,6 @@ class Inventario{
         if(max !== 0){
             do{
                 buscado = Math.floor((min + max)/2);
-                console.log(buscado);
                 if(this._productos[buscado].getCodigo() == codigo){ 
                     fin = true;
                     return this._productos[buscado];
@@ -61,33 +60,39 @@ class Inventario{
                         min = buscado+1;
                     }
                 }
-                console.log(min);
-                console.log(max);
             }while(fin === false && min < max);    
         }
-
         return null;
     }
 
     eliminar(codigo){
-        let c = 0;
-        let aux = 0;
-        let num = 0;
         let e = false;
-        
-        while(c < this._productos.length){
-            if(this._productos[c].getCodigo() === codigo){
-                num = c;
-                aux = this._productos[c];
-                e = true;
-            }
-            c++;
+        let fin = false;
+        let min = 0; 
+        let max = this._productos.length;
+        let buscado;
+
+        if(max !== 0){
+            do{
+                buscado = Math.floor((min + max)/2);
+                console.log(buscado);
+                if(this._productos[buscado].getCodigo() == codigo){ 
+                    e = true;
+                    fin = true;
+                }else{
+                    if(this._productos[buscado].getCodigo() > codigo){
+                        max = buscado-1;
+                    }else{
+                        min = buscado+1;
+                    }
+                }
+            }while(fin === false && min < max);    
         }
 
         if(e === false){
             return -1;
         }else{
-            for(let i = num; i <= this._productos.length - 1; i++){
+            for(let i = buscado; i <= this._productos.length - 1; i++){
                 this._productos[i] = this._productos[i + 1];
             }
             this._productos.pop();
